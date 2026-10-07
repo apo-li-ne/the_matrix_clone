@@ -4,12 +4,10 @@ import sys
 
 
 def is_in_venv() -> bool:
-    """Return True if Python runs inside a virtual environment"""
     return sys.prefix != sys.base_prefix
 
 
 def get_packages_path() -> str:
-    """Return the path where packages are installed"""
     paths = site.getsitepackages()
     if paths:
         return paths[0]
@@ -17,7 +15,6 @@ def get_packages_path() -> str:
 
 
 def show_outside_venv() -> None:
-    """Display info when running in the global environment"""
     lines = [
         "MATRIX STATUS: You’re still plugged in\n",
         f"Current Python: {sys.executable}",
@@ -35,7 +32,6 @@ def show_outside_venv() -> None:
 
 
 def show_inside_venv() -> None:
-    """Display info when running inside a virtual environment"""
     lines = [
         "MATRIX STATUS: Welcome to the construct\n",
         f"Current Python: {sys.executable}",
@@ -45,14 +41,13 @@ def show_inside_venv() -> None:
         "Safe to install packages without affecting",
         "the global system.\n",
         "Package installation path:",
-        get_packages_loc(),
+        get_packages_path(),
     ]
     for line in lines:
         print(line)
 
 
 def main() -> None:
-    """Choose the display depending on the environment"""
     if is_in_venv():
         show_inside_venv()
     else:
